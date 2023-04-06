@@ -92,10 +92,14 @@ if(freetype-gl_OFF_SCREEN)
     # Build OFF screen must use FindOpenGL with GLVND
     # The only one module OpenGL are needed for libOpenGL.so
     set(OpenGL_GL_PREFERENCE GLVND)
-    find_package(OpenGL REQUIRED OpenGL EGL)
+    if(NOT ANDROID_PLATFORM)
+        find_package(OpenGL REQUIRED OpenGL EGL)
+    endif()
     set(OPENGL_LIBRARY ${OPENGL_opengl_LIBRARY})
 else()
-    find_package(OpenGL REQUIRED)
+    if(NOT ANDROID_PLATFORM)
+        find_package(OpenGL REQUIRED)
+    endif()
 endif()
 find_package(Freetype REQUIRED)
 

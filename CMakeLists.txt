@@ -205,6 +205,11 @@ endif()
 if(freetype-gl_BUILD_MAKEFONT)
     add_executable(makefont makefont.c)
 
+    if (ANDROID_PLATFORM)
+        find_library(log-lib log)
+        target_link_libraries(makefont ${log-lib})
+    endif()
+
     target_link_libraries(makefont
         freetype-gl
         ${OPENGL_LIBRARY}
